@@ -1,0 +1,27 @@
+2018-04-04T22:01:56  PID[10444] Error       'ReplyToId' cannot be null.
+2018-04-04T22:01:56  PID[10444] Error          at Microsoft.Bot.Connector.ConversationsExtensions.ReplyToActivityAsync(IConversations operations, Activity activity, CancellationToken cancellationToken)
+   at Microsoft.Bot.Builder.Dialogs.Internals.AlwaysSendDirect_BotToUser.<Microsoft-Bot-Builder-Dialogs-Internals-IBotToUser-PostAsync>d__4.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.Bot.Builder.Dialogs.Internals.InputHintQueue.<Microsoft-Bot-Builder-Dialogs-Internals-IMessageQueue-QueueMessageAsync>d__4.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.Bot.Builder.Dialogs.Internals.AutoInputHint_BotToUser.<Microsoft-Bot-Builder-Dialogs-Internals-IBotToUser-PostAsync>d__3.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.Bot.Builder.Dialogs.Internals.MapToChannelData_BotToUser.<PostAsync>d__3.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.Bot.Builder.Dialogs.Internals.LogBotToUser.<Microsoft-Bot-Builder-Dialogs-Internals-IBotToUser-PostAsync>d__4.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.Bot.Builder.Dialogs.Internals.DialogContext.<Microsoft-Bot-Builder-Dialogs-Internals-IBotToUser-PostAsync>d__12.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.Bot.Sample.SimpleEchoBot.EchoDialog.<MessageReceivedAsync>d__3.MoveNext() in C:\VSProjects\Office365\Dialogs\EchoDialog.cs:line 255
