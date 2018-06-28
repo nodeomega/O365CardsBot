@@ -200,7 +200,7 @@ namespace Microsoft.Bot.Sample.O365CardsBot
             {
                 Summary = "O365 card summary",
                 ThemeColor = "#E67A9E",
-                Title = "card title",
+                Title = "card title edit test here",
                 Text = "card text",
                 Sections = new List<O365ConnectorCardSection> { section },
                 PotentialAction = new List<O365ConnectorCardActionBase>
@@ -227,12 +227,27 @@ namespace Microsoft.Bot.Sample.O365CardsBot
 
         public async Task StartAsync(IDialogContext context)
         {
+            // console.log WTF
             context.Wait(MessageReceivedAsync);
         }
 
         public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
         {
             var message = await argument;
+
+            var numberOfAttachments = message.Attachments.Count;
+
+            if (numberOfAttachments > 0)
+            {
+                await context.PostAsync($"{numberOfAttachments} attachment(s) found.");
+
+                for (var i = 0; i < numberOfAttachments; i++)
+                {
+                    await context.PostAsync($"Attachment #{i + 1} URL: {message.Attachments[i].ContentUrl}");
+                    await context.PostAsync($"Attachment #{i + 1} Type: {message.Attachments[i].ContentType}");
+                    await context.PostAsync($"Attachment #{i + 1} Name: {message.Attachments[i].Name}");
+                }
+            }
 
             if (message.Text == "reset")
             {
@@ -243,6 +258,10 @@ namespace Microsoft.Bot.Sample.O365CardsBot
                     "Didn't get that!",
                     promptStyle: PromptStyle.Auto);
             }
+            //else if (message.Attachments.Count > 0)
+            //{
+
+            //}
             else
             {
                 
@@ -277,6 +296,16 @@ namespace Microsoft.Bot.Sample.O365CardsBot
             else
             {
                 await context.PostAsync("Did not reset count.");
+                var noReset = new HeroCard("Test Hero Card", "Gotta figure out invoke", "Testing with debugger for invoke timing.", null, new[]
+                {
+                    new CardAction(ActionTypes.ImBack, "ImBack", value: "Wikipedia"),
+                    new CardAction(ActionTypes.MessageBack, "MessageBack", value: "Wookiee"),
+                    new CardAction("invoke", "MessageBack", value: "Null")
+                });
+                var sendThis = noReset.ToAttachment();
+                var sendMessage = context.MakeMessage();
+                sendMessage.Attachments.Add(sendThis);
+                await context.PostAsync(sendMessage);
             }
             context.Wait(MessageReceivedAsync);
         }

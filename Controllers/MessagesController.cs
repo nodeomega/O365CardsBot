@@ -5,12 +5,33 @@ using Microsoft.Bot.Connector;
 using Microsoft.Bot.Builder.Dialogs;
 using System.Web.Http.Description;
 using System.Net.Http;
+using System;
+using System.Configuration;
+using Polly;
 
 namespace Microsoft.Bot.Sample.O365CardsBot
 {
     [BotAuthentication]
     public class MessagesController : ApiController
     {
+        /// <summary>
+        /// Connector client instance to send requests to Bot Framework.
+        /// </summary>
+        private ConnectorClient connectorClient;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MessagesController"/> class.
+        /// </summary>
+        public MessagesController()
+        {
+            this.connectorClient = new ConnectorClient(
+                new Uri("https://smba.trafficmanager.net/amer-client-ss.msg/"),
+                ConfigurationManager.AppSettings[MicrosoftAppCredentials.MicrosoftAppIdKey],
+                ConfigurationManager.AppSettings[MicrosoftAppCredentials.MicrosoftAppPasswordKey]);
+            this.connectorClient.SetRetryPolicy(RetryHelpers.DefaultPolicyBuilder.WaitAndRetryAsync(new[] { TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(10), TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(30) }));
+        }
+
+
         /// <summary>
         /// POST: api/Messages
         /// receive a message from a user and send replies
